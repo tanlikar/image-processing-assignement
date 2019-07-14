@@ -135,7 +135,7 @@ for F=1:b
         end
     end
 end
-
+%STDR,STDG,STDB,STDH,STDS,STDV,
 T = table(MR,MG,MB,MH,MS,MV,STDR,STDG,STDB,STDH,STDS,STDV,ER,EG,EB,EH,ES,EV,Concentration);
 filename = 'imageDatanew.xlsx';
 writetable(T,filename,'Sheet',1, 'WriteVariableNames',true);

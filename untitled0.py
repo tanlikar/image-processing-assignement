@@ -8,7 +8,7 @@ import statistics as st
 
 dataset = pd.read_excel('imageDataDay1new.xlsx', index_col=None, header=0)
 #X = dataset.iloc[:, [0,1,2,6,7,8]].values
-X = dataset.iloc[:, 0:4].values
+X = dataset.iloc[:,[0,2,3,4,14]].values
 y = dataset.iloc[:, 12].values
 
 from sklearn import preprocessing

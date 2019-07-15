@@ -11,7 +11,9 @@ dataset = pd.read_excel('imageDatanew.xlsx', index_col=None, header=0)
 #0:19 for day 1, 19: for day 2
 #separate day prediction use 0,2,3,4,14
 #combine dat prediction use [0,1,2,3,4,5,13]
-X = dataset.iloc[:, [0,1,2,3,4,5,13]].values
+#X = dataset.iloc[:, [0,1,2,3,4,5,13]].values
+#X = dataset.iloc[:, [0,2,3,4,14]].values
+X = dataset.iloc[:,[0,1,2,3,4,5,13]].values
 y = dataset.iloc[:, 18].values
 
 from sklearn import preprocessing
@@ -39,7 +41,7 @@ classifierLR = LogisticRegression(random_state = 1)
 from sklearn.metrics import confusion_matrix
 
 from sklearn.model_selection import KFold 
-kf = KFold(n_splits=38, random_state=0, shuffle=False) 
+kf = KFold(n_splits=19, random_state=0, shuffle=True) 
 
 score=[]
 scoreNB = []

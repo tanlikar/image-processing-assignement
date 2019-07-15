@@ -87,13 +87,13 @@ for n=1:N
         MV = [MV;mean2(K_V)];
         
         % find the standard deviation of each channel
-        STDR=[STDR;std2(J_R)];
-        STDG=[STDG;std2(J_G)];
-        STDB=[STDB;std2(J_B)];
-        
-        STDH=[STDH;std2(K_H)];
-        STDS=[STDS;std2(K_S)];
-        STDV=[STDV;std2(K_V)];
+%         STDR=[STDR;std2(J_R)];
+%         STDG=[STDG;std2(J_G)];
+%         STDB=[STDB;std2(J_B)];
+%         
+%         STDH=[STDH;std2(K_H)];
+%         STDS=[STDS;std2(K_S)];
+%         STDV=[STDV;std2(K_V)];
         
         if n == N
             break
@@ -101,7 +101,8 @@ for n=1:N
     end
 end
 
-T = table(MR,MG,MB,MH,MS,MV,STDR,STDG,STDB,STDH,STDS,STDV,Concentration);
+% STDR,STDG,STDB,STDH,STDS,STDV
+T = table(MR,MG,MB,MH,MS,MV,Concentration);
 filename = 'imageDataDay2new.xlsx';
 writetable(T,filename,'Sheet',1, 'WriteVariableNames',true);
 

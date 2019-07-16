@@ -9,7 +9,7 @@ import statistics as st
 dataset = pd.read_excel('imageDatanew.xlsx', index_col=None, header=0)
 #X = dataset.iloc[:, [0,1,2,6,7,8]].values
 #0:19 for day 1, 19: for day 2
-#separate day prediction use 0,2,3,4,14
+#separate day prediction use 0,2,3,4 day1,  0,2,3,4,14 day2
 #combine dat prediction use [0,1,2,3,4,5,13]
 #X = dataset.iloc[:, [0,1,2,3,4,5,13]].values
 #X = dataset.iloc[:, [0,2,3,4,14]].values
@@ -33,9 +33,6 @@ classifier = RandomForestClassifier(n_estimators= 500, criterion = 'entropy', ra
 
 from sklearn.naive_bayes import GaussianNB
 classifierNB = GaussianNB()
-
-from sklearn.linear_model import LogisticRegression
-classifierLR = LogisticRegression(random_state = 1)
 
 
 from sklearn.metrics import confusion_matrix

@@ -43,15 +43,15 @@ for F=1:b
             if n == N  %for control
                 B = imcrop(I, [1700 1370 150 500]); %crop ROI
                 Q = B;
-%                 figure, imshow(B)
+                figure, imshow(B)
             else
                 A = imcrop(I, [750 1370 150 500]); %crop ROI
                 B = imcrop(I, [1700 1370 150 500]); %crop ROI
                 C = imcrop(I, [2750 1370 150 500]); %crop ROI
 %                 
-%                 figure, imshow(A)
-%                 figure, imshow(B)
-%                 figure, imshow(C)
+                figure, imshow(A)
+                figure, imshow(B)
+                figure, imshow(C)
                 Q = cat(3, A, B, C);
             end
         else
@@ -63,9 +63,9 @@ for F=1:b
                 A = imcrop(I, [520 1370 150 500]); %crop ROI
                 B = imcrop(I, [1700 1370 150 500]); %crop ROI
                 C = imcrop(I, [2850 1370 150 500]); %crop ROI
-%                 figure, imshow(A)
-%                 figure, imshow(B)
-%                 figure, imshow(C)
+                figure, imshow(A)
+                figure, imshow(B)
+                figure, imshow(C)
                 Q = cat(3, A, B, C);
             end
         end
@@ -88,12 +88,12 @@ for F=1:b
             J_G_F = medfilt2(J_G, [200 200], 'symmetric');
             J_B_F = medfilt2(J_B, [200 200], 'symmetric');
             J = cat(3, J_R_F, J_G_F, J_B_F);
-%             figure, imshow(J)
+            figure, imshow(J)
             
             % 51x51 average filter to get uniform image
             ave_filter=fspecial('average',[51 51]);
             J=imfilter(J,ave_filter,'replicate');
-%             figure, imshow(J)
+            figure, imshow(J)
             
             %convert RGB to HSV
             K = rgb2hsv(J);

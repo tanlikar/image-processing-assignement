@@ -34,6 +34,10 @@ classifier = RandomForestClassifier(n_estimators= 500, criterion = 'entropy', ra
 from sklearn.naive_bayes import GaussianNB
 classifierNB = GaussianNB()
 
+# Fitting Decision Tree Classification to the Training set
+from sklearn.tree import DecisionTreeClassifier
+classifierDT = DecisionTreeClassifier(criterion = 'entropy', random_state = 1)
+
 
 from sklearn.metrics import confusion_matrix
 
@@ -42,15 +46,19 @@ kf = KFold(n_splits=19, random_state=0, shuffle=True)
 
 score=[]
 scoreNB = []
+scoreDT = []
 
 cmRF = []
 cmNB = []
+cmDT = []
 
 y_test_1 = []
 y_test_NB1 = []
+y_test_DT1 = []
 
 y_pred_1 = []
 y_pred_NB1 = []
+y_pred_DT1 = []
 
 from sklearn.metrics import accuracy_score
 for train_index, test_index in kf.split(X):
@@ -74,7 +82,15 @@ for train_index, test_index in kf.split(X):
       y_test_NB1.append(y_test)      
       y_pred_NB1.append(y_pred)
       
+      classifierDT.fit(X_train, y_train)
+      y_pred_DT = classifier.predict(X_test)
+      scoreDT.append(classifier.score(X_test,y_test))
+      cmDT.append(confusion_matrix(y_test, y_pred))
+      y_test_DT1.append(y_test)      
+      y_pred_DT1.append(y_pred)
+      
       
 
 print(st.mean(score))
 print(st.mean(scoreNB))
+print(st.mean(scoreDT))

@@ -33,6 +33,9 @@ folder = ["day1", "day2"];
 for F=1:b
     imDir = fullfile('c:\','Users','tanli', 'OneDrive','year 4 sem 1', 'image processing', 'assignment' , folder(F));
     
+    saveDir = fullfile('c:\','Users','tanli', 'OneDrive','year 4 sem 1', 'image processing', 'assignment' , 'processed' , folder(F));
+    mkdir(saveDir);
+    
     imds = imageDatastore(imDir);
     N = numpartitions(imds); %number of image in folder
     
@@ -43,15 +46,23 @@ for F=1:b
             if n == N  %for control
                 B = imcrop(I, [1700 1370 150 500]); %crop ROI
                 Q = B;
-                figure, imshow(B)
+                %figure, imshow(B)
+                imwrite(B, saveDir + "\" + Concentration(19*F)+"_Crop.png");
+                
             else
                 A = imcrop(I, [750 1370 150 500]); %crop ROI
                 B = imcrop(I, [1700 1370 150 500]); %crop ROI
                 C = imcrop(I, [2750 1370 150 500]); %crop ROI
 %                 
-                figure, imshow(A)
-                figure, imshow(B)
-                figure, imshow(C)
+                %figure, imshow(A)
+                %figure, imshow(B)
+                %figure, imshow(C)
+                
+                %save image
+                imwrite(A, saveDir + "\" + Concentration(1+(3*(n-1))) + "_" + 1+"_Crop.png");
+                imwrite(B, saveDir + "\" + Concentration(2+(3*(n-1))) + "_" + 2+"_Crop.png");
+                imwrite(C, saveDir + "\" + Concentration(3+(3*(n-1))) + "_" + 3+"_Crop.png");
+                
                 Q = cat(3, A, B, C);
             end
         else
@@ -59,13 +70,20 @@ for F=1:b
                 B = imcrop(I, [1700 1370 150 500]); %crop ROI
                 Q = B;
 %                 figure, imshow(B)
+                imwrite(B, saveDir + "\" + Concentration(19*(F))+"_Crop.png");
+                
             else
                 A = imcrop(I, [520 1370 150 500]); %crop ROI
                 B = imcrop(I, [1700 1370 150 500]); %crop ROI
                 C = imcrop(I, [2850 1370 150 500]); %crop ROI
-                figure, imshow(A)
-                figure, imshow(B)
-                figure, imshow(C)
+                
+                %figure, imshow(A)
+                %figure, imshow(B)
+                %figure, imshow(C)
+                imwrite(A, saveDir + "\" + Concentration(1+(3*(n-1))+19) + "_" + 1+"_Crop.png");
+                imwrite(B, saveDir + "\" + Concentration(2+(3*(n-1))+19) + "_" + 2+"_Crop.png");
+                imwrite(C, saveDir + "\" + Concentration(3+(3*(n-1))+19) + "_" + 3+"_Crop.png");
+                
                 Q = cat(3, A, B, C);
             end
         end
@@ -88,12 +106,25 @@ for F=1:b
             J_G_F = medfilt2(J_G, [200 200], 'symmetric');
             J_B_F = medfilt2(J_B, [200 200], 'symmetric');
             J = cat(3, J_R_F, J_G_F, J_B_F);
-            figure, imshow(J)
+            
+            if(n == N)
+                imwrite(J, saveDir + "\" + Concentration(19*F) + "_"+"_Median.png");
+            else
+                imwrite(J, saveDir + "\" + Concentration(1+x+(3*(n-1))+(19*(F-1))) + "_" + (x+1)+"_Median.png");
+            end
+            
+            %figure, imshow(J)
             
             % 51x51 average filter to get uniform image
             ave_filter=fspecial('average',[51 51]);
             J=imfilter(J,ave_filter,'replicate');
-            figure, imshow(J)
+            
+            if(n == N)
+                imwrite(J, saveDir + "\" + Concentration(19*F)+"_Average.png");
+            else
+                imwrite(J, saveDir + "\" + Concentration(1+x+(3*(n-1))+(19*(F-1))) + "_" + (x+1)+"_Average.png");
+            end
+            %figure, imshow(J)
             
             %convert RGB to HSV
             K = rgb2hsv(J);

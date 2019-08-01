@@ -6,15 +6,19 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import statistics as st
 
-dataset = pd.read_excel('imageDatanew.xlsx', index_col=None, header=0)
-#X = dataset.iloc[:, [0,1,2,6,7,8]].values
+#dataset = pd.read_excel('imageDatanew.xlsx', index_col=None, header=0)
+dataset = pd.read_excel('imageDatanewTEST.xlsx', index_col=None, header=0)
+
 #0:19 for day 1, 19: for day 2
 #separate day prediction use 0,2,3,4 day1,  0,2,3,4,14 day2
+
 #combine dat prediction use [0,1,2,3,4,5,13]
 #X = dataset.iloc[:, [0,1,2,3,4,5,13]].values
 #X = dataset.iloc[:, [0,2,3,4,14]].values
-X = dataset.iloc[:,[0,1,2,3,4,5,13]].values
-y = dataset.iloc[:, 18].values
+
+
+X = dataset.iloc[:,[0,1,2,3,4,5,7]].values
+y = dataset.iloc[:, 12].values
 
 from sklearn import preprocessing
 from sklearn import utils
@@ -60,6 +64,7 @@ y_pred_1 = []
 y_pred_NB1 = []
 y_pred_DT1 = []
 
+#perform k-fold validation
 from sklearn.metrics import accuracy_score
 for train_index, test_index in kf.split(X):
       print("Train:", train_index, "Validation:",test_index)

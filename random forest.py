@@ -9,15 +9,10 @@ import statistics as st
 #dataset = pd.read_excel('imageDatanew.xlsx', index_col=None, header=0)
 dataset = pd.read_excel('imageDatanewTEST.xlsx', index_col=None, header=0)
 
-#0:19 for day 1, 19: for day 2
-#separate day prediction use 0,2,3,4 day1,  0,2,3,4,14 day2
 
-#combine dat prediction use [0,1,2,3,4,5,13]
-#X = dataset.iloc[:, [0,1,2,3,4,5,13]].values
-#X = dataset.iloc[:, [0,2,3,4,14]].values
-
-
-X = dataset.iloc[:,[0,1,2,3,4,5,7]].values
+#X = dataset.iloc[:,[0,1,2,3,4,5,7]].values #both day
+#X = dataset.iloc[:19,[0,2,3,4]].values #day 1 only
+X = dataset.iloc[19:,[0,2,3,4,8]].values #day 2 only
 y = dataset.iloc[:, 12].values
 
 from sklearn import preprocessing
@@ -96,6 +91,6 @@ for train_index, test_index in kf.split(X):
       
       
 
-print(st.mean(score))
-print(st.mean(scoreNB))
-print(st.mean(scoreDT))
+print("Random Forest Accuracy: ", st.mean(score))
+print("Naive Bayes Accuracy: ",st.mean(scoreNB))
+print("Decision Tree Accuracy: ",st.mean(scoreDT))

@@ -10,9 +10,9 @@ import statistics as st
 dataset = pd.read_excel('imageDatanewTEST.xlsx', index_col=None, header=0)
 
 
-#X = dataset.iloc[:,[0,1,2,3,4,5,7]].values #both day
+X = dataset.iloc[:,[0,1,2,3,4,5,7]].values #both day
 #X = dataset.iloc[:19,[0,2,3,4]].values #day 1 only
-X = dataset.iloc[19:,[0,2,3,4,8]].values #day 2 only
+#X = dataset.iloc[19:,[0,2,3,4,8]].values #day 2 only
 y = dataset.iloc[:, 12].values
 
 

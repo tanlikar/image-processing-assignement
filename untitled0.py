@@ -1,15 +1,21 @@
-import numpy as np
+import paho.mqtt.client as mqtt
 
-H=29
-d=2.4
-t=0.06
-B = 60  # inches
-rho = 0.3  # lb/in^3
-E = 30000  # kpsi (1000-psi)
-P = 66  # kip (1000-lbs, force)
-args = (B, rho, E, P)
+# The callback for when the client receives a CONNACK response from the server.
+def on_connect(client, userdata, flags, rc):
+    print("Connected with result code "+str(rc))
 
-def buckling_stress(x, *args):
-    H, d, t = x
-    B, rho, E, P = args
-    return (np.pi**2*E*(d**2 + t**2))/(8*((B/2)**2 + H**2))
+    # Subscribing in on_connect() means that if we lose the connection and
+    # reconnect then subscriptions will be renewed.
+    client.subscribe("temp")
+
+# The callback for when a PUBLISH message is received from the server.
+def on_message(client, userdata, msg):
+    print(msg.topic+" "+str(msg.payload))
+
+client = mqtt.Client()
+client.on_connect = on_connect
+client.on_message = on_message
+
+client.connect("192.168.137.158", 1883, 60)
+
+client.loop_forever()
